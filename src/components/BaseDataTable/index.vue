@@ -19,6 +19,7 @@
       <el-table-column
         v-for="(item,index) in columns"
         :key="index"
+        :show-overflow-tooltip="item.showOverflowTooltip?item.showOverflowTooltip:false"
         :label="item.label"
         :prop="item.prop"
         :align="item.align"

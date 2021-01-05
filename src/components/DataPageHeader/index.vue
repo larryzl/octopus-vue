@@ -13,9 +13,8 @@
 
 <script>
   export default {
-    name: "CreateUpdateHeader",
+    name: "DataPageHeader",
     mounted() {
-      console.log()
     },
     computed:{
       title(){

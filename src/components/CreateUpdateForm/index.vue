@@ -5,6 +5,7 @@
       <div v-for="(item,index) in formInfo" :key="index">
         <div style="font-weight: bolder;margin-bottom: 15px">{{item.label}}</div>
         <el-form-item v-for="(field,key) in item.fields" :key="key"
+                      :prop="field.name"
                       :label="field.label">
 
           <el-input v-if="field.type==='input'" v-model="field.value"  />
@@ -13,11 +14,15 @@
             <el-option :label="v.label" :value="v.value" :key="k" v-for="(v,k) in field.options"></el-option>
           </el-select>
 
-          <el-input v-if="field.type==='select-input'" v-model="field.input" class="input-with-select" style="width: 30%">
-            <el-select slot="prepend" v-model="field.select" placeholder="请选择" style="width: 100%">
+          <el-input v-if="field.type==='select-input'" v-model="field.input" style="width:100%">
+            <el-select slot="prepend"
+                       style="width: 100px"
+                       @change="handleChangeSelect(field.callback,field.select)"
+                       v-model="field.select"  placeholder="请选择" >
               <el-option :label="v.label" :value="v.value" :key="k" v-for="(v,k) in field.options"></el-option>
             </el-select>
           </el-input>
+
 
         </el-form-item>
         <el-divider></el-divider>
@@ -25,6 +30,7 @@
 <!--      <el-form-item v-for="(item,index) in formInfo" :key="index" :label="item"-->
 
     </el-form>
+      <el-button @click="handleClick">确定</el-button>
     </el-card>
   </div>
 
@@ -46,11 +52,25 @@
         type: String,
         default: '80px'
       }
+    },
+    data(){
+
+      return {
+        select:'',
+        input3:''
+      }
+    },
+    methods:{
+      handleChangeSelect(func,val){
+        func({selected:val})
+      },
+      handleClick(){
+        console.log('this.formData:',this.formData)
+      }
     }
 
   }
 </script>
 
 <style scoped>
-
 </style>
